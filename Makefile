@@ -11,11 +11,16 @@ build:
 
 # Run the application
 run:
+	@echo "Server running..."
+
 	@go run cmd/api/main.go
 
 # Create DB container
 docker-run:
-	@docker compose up --build
+	@docker compose up --build -d
+
+docker-logs:
+	@docker compose logs -f
 
 # Shutdown DB container
 docker-down:
@@ -47,4 +52,4 @@ watch:
 		Write-Output 'Watching...'; \
 	}"
 
-.PHONY: all build run test clean watch docker-run docker-down itest
+.PHONY: all build run test clean watch docker-run docker-logs docker-down itest
