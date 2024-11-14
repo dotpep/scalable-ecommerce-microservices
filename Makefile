@@ -6,12 +6,11 @@ all: build test
 build:
 	@echo "Building..."
 	
-	
 	@go build -o main.exe cmd/api/main.go
 
 # Run the application
 run:
-	@echo "Server running..."
+	@echo "Server is on running..."
 
 	@go run cmd/api/main.go
 
@@ -19,6 +18,7 @@ run:
 docker-run:
 	@docker compose up --build -d
 
+# Check Logs
 docker-logs:
 	@docker compose logs -f
 
@@ -52,4 +52,4 @@ watch:
 		Write-Output 'Watching...'; \
 	}"
 
-.PHONY: all build run test clean watch docker-run docker-logs docker-down itest
+.PHONY: all build run test clean watch docker-run docker-down itest

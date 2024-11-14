@@ -8,9 +8,40 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Notes
 
+### Docker
+
 - `docker exec -it core-shop-service-psql_bp-1 bash`
 
+### Powershell
+
+- `netstat` for checking networks and what port they are using
+- `ps` is alias for `Get-Process` for checking process that is running or just Task Manager
+
 ---
+
+How to find web/api-server that is running on specific `port`? and also stop this process.
+
+PORT=8080
+PID=16064
+
+1. `netstat -ano | findstr <PORT>` for finding the Process ID (PID)
+2. `Get-Process -Id <PID>` for verifying the Process is running
+3. `Stop-Process -Id <PID> -Force` for terminating the Process
+
+Full Example:
+
+```powershell
+# Find the process ID (PID) on port 8080
+$pid = (netstat -ano | findstr :8080 | ForEach-Object { $_ -split '\s+' })[-1]
+
+# Verify the process (optional step)
+Get-Process -Id $pid
+
+# Kill the process
+Stop-Process -Id $pid -Force
+```
+
+### Problems
 
 Problems that can occur:
 

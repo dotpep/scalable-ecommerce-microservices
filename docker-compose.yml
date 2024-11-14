@@ -1,4 +1,18 @@
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:8080"
+    restart: unless-stopped
+    depends_on:
+      - psql_bp
+    environment:
+      API_PORT: ${PORT}
+    networks:
+      - backend
+
   psql_bp:
     image: postgres:latest
     restart: unless-stopped
@@ -10,6 +24,11 @@ services:
       - "${BLUEPRINT_DB_PORT}:5432"
     volumes:
       - psql_volume_bp:/var/lib/postgresql/data
+    networks:
+      - backend
 
 volumes:
   psql_volume_bp:
+
+networks:
+  backend:
