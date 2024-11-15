@@ -4,31 +4,31 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${PORT}:8080"
+      - "${API_PORT}:8080"
     restart: unless-stopped
     depends_on:
-      - psql_bp
+      - postgresdb
     environment:
-      API_PORT: ${PORT}
+      API_PORT: ${API_PORT}
     networks:
       - backend
 
-  psql_bp:
+  postgresdb:
     image: postgres:latest
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${BLUEPRINT_DB_DATABASE}
-      POSTGRES_USER: ${BLUEPRINT_DB_USERNAME}
-      POSTGRES_PASSWORD: ${BLUEPRINT_DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_DB_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
     ports:
-      - "${BLUEPRINT_DB_PORT}:5432"
+      - "${POSTGRES_DB_PORT}:5432"
     volumes:
-      - psql_volume_bp:/var/lib/postgresql/data
+      - postgresdb_volume:/var/lib/postgresql/data
     networks:
       - backend
 
 volumes:
-  psql_volume_bp:
+  postgresdb_volume:
 
 networks:
   backend:

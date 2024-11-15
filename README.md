@@ -6,11 +6,30 @@ One Paragraph of project description goes here
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+## TO DO
+
+- [ ] Use .env or config/main.yml file for giving PORT (to Dockerfile and etc)
+- [ ] Rename of .env variables
+- [ ] restructure to clean architecture
+- [ ] use .air.toml for watch in dockerfile
+- [ ] write endpoints for core-shop-service (routes) (repository)
+- [ ] write unit tests
+- [ ] write CI/CD
+- [ ] divide docker compose to two docker composes (app, storage) and also for staging (development, production)
+- [ ] connect swagger/openapi documentation
+
+---
+
+- [ ] docker compose (app for api) and (storage for postges)
+- [ ] dockerfile and docker compose stagging dev/prod
+- [ ] docker image to dockerhub for production
+
 ## Notes
 
 ### Docker
 
-- `docker exec -it core-shop-service-psql_bp-1 bash`
+- `docker exec -it core-shop-service-psql_bp-1 bash` (to troubleshoot inside container with bash)
+- `docker-compose down -v` deletes volumes (if you have error with /health endpoint that check connection of postgres database)
 
 ### Powershell
 
